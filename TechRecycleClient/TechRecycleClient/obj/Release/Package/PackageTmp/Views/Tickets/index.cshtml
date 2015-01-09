@@ -1,0 +1,48 @@
+﻿@model string
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tech Recycle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="~/content/images/favicon.ico" rel="shortcut icon" />
+    <link href="~/content/styles/bootstrap.css" rel="stylesheet" />
+    <link href="~/content/styles/style.css" rel="stylesheet" />
+</head>
+<body ng-app="techRecycleApp" ng-controller="MainCtrl">
+    <div ng-init="w_alias = '@ViewBag.Alias'"></div>
+    <div ng-init="w_name = '@ViewBag.Name'"></div>
+    <div ng-init="w_phone = '@ViewBag.Phone'"></div>
+    <div ng-init="w_email = '@ViewBag.Email'"></div>
+    <div class="wrapper center">
+        <header>
+            <a href="#/Dashboard" class="ref-logo"><img src="~/content/images/logo_renf.png" /></a>
+            <div class="header-content" hdr-adapt-width>
+                <h1>
+                    Tech Recycle Request - Puget Sound
+                </h1>
+                <div class="description">
+                    This tool is used to manage and submit recycle requests for hardware to be picked up. To get started, please select an option from below. You can also view and edit your tickets.
+                </div>
+                <nav ng-controller="NavCtrl">
+                    <ul>
+                        <li>
+                            <a href="#/Dashboard" ng-class="isActive('/Dashboard') ? 'active-link' : 'inactive-link'" highlight-on-hover>Home</a>
+                        </li><li>
+                            <a href="#/TicketCreate" ng-class="isActive('/TicketCreate') ? 'active-link' : 'inactive-link'" highlight-on-hover>Create A Ticket</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <ng-view ng-init="tickets = @Model"></ng-view>
+    </div>
+    <footer class="center"></footer>
+    <script src="~/content/scripts/angular.js"></script>
+    <script src="~/content/scripts/angular-route.js"></script>
+    <script src="~/content/scripts/angular-animate.js"></script>
+    <script src="~/content/scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="~/app/app.js"></script>
+</body>
+</html>

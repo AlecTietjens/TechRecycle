@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TechRecycleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BulkTicketDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TicketNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BinQuantity" Type="Int32" Nullable="false" />
+    <Property Name="BinLocation1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BinLocation2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BinLocation3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BinLocation4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BinLocation5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="HBITicketDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TicketNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NeedsSecureBins" Type="Boolean" Nullable="false" />
+    <Property Name="SecureBinQuantity" Type="Int32" Nullable="false" />
+    <Property Name="DestructionLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="WitnessType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TicketNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Alias" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AlternateName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AlternatePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AlternateEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Building" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ComputerQuantity" Type="Int32" Nullable="false" />
+    <Property Name="MonitorQuantity" Type="Int32" Nullable="false" />
+    <Property Name="MiscQuantity" Type="Int32" Nullable="false" />
+    <Property Name="PickupSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsHBIRequest" Type="Boolean" Nullable="false" />
+    <Property Name="AdditionalNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CurrentStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OpenDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="CloseDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="TechRecycleEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BulkTicketDetails" EntityType="Self.BulkTicketDetail" />
+    <EntitySet Name="HBITicketDetails" EntityType="Self.HBITicketDetail" />
+    <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+  </EntityContainer>
+</Schema>

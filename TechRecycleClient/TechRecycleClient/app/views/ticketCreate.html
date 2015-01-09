@@ -1,0 +1,157 @@
+﻿<section class="center">
+    <h2 class="header-box center">Hardware Pickup Request</h2>
+    <accordion close-others="true">
+        <form name="form" ng-submit="ticketCreate()" ng-init="setFormScope(this)" novalidate>
+
+            <input type="hidden" name="alias" ng-init="ticket.alias=w_alias" ng-model="ticket.alias" />
+
+            <!--First Box-->
+            <accordion-group class="box center inactive-box" ng-class="isActive(0) ? 'active-box' : 'inactive-box'" is-open="boxes[0].isOpen" highlight-on-hover ng-click="selectBox(0);$event.stopPropagation();">
+                <accordion-heading>Requester Information</accordion-heading>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <label for="name">Name</label><span ng-show="form.name.$error.required">Required</span><br />
+                    <input type="text" name="name" ng-model="ticket.name" ng-init="ticket.name=w_name" required /><br />
+
+                    <label for="phone">Phone</label><span ng-show="form.phone.$error.required">Required</span><br />
+                    <input type="text" name="phone" ng-model="ticket.phone" ng-init="ticket.phone=w_phone" required /><br />
+
+                    <label for="email">Email</label><span ng-show="form.email.$error.required">Required</span><span ng-show="form.email.$error.email">Invalid Email</span><br />
+                    <input type="email" name="email" ng-model="ticket.email" ng-init="ticket.email=w_email" required />
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <label for="alternateName">Alternate Name</label><span ng-show="form.alternateName.$error.required">Required</span><br />
+                    <input type="text" name="alternateName" ng-model="ticket.alternateName" required /><br />
+
+                    <label for="alternatePhone">Alternate Phone</label><span ng-show="form.alternatePhone.$error.required">Required</span><br />
+                    <input type="text" name="alternatePhone" ng-model="ticket.alternatePhone" required /><br />
+
+                    <label for="alternateEmail">Alternate Email</label><span ng-show="form.alternateEmail.$error.required">Required</span><span ng-show="form.alternateEmail.$error.email">Invalid Email</span><br />
+                    <input type="email" name="alternateEmail" ng-model="ticket.alternateEmail" required /><br />
+                </div>
+                <input type="button" value="Next" ng-click="selectBox(1);$event.stopPropagation();" />
+            </accordion-group>
+
+            <!--Second Box-->
+            <accordion-group class="center box inactive-box" ng-class="isActive(1) ? 'active-box' : 'inactive-box'" is-open="boxes[1].isOpen" highlight-on-hover ng-click="selectBox(1);$event.stopPropagation();">
+                <accordion-heading>Pickup Location</accordion-heading>
+
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <label for="building">Building</label><span ng-show="form.building.$error.required">Required</span><br />
+                    <select name="building" ng-model="ticket.building" required>
+                        <option value="{{building}}" ng-repeat="building in buildings">{{building}}</option>
+                    </select>
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-8">
+                    <label for="location">Location in Building (Room/Lab/Lobby/Etc.)</label><span ng-show="form.location.$error.required">Required</span><br />
+                    <input type="text" name="location" ng-model="ticket.location" required />
+                </div>
+                <input type="button" value="Back" ng-click="selectBox(0);$event.stopPropagation();" />
+                <input type="button" value="Next" ng-click="selectBox(2);$event.stopPropagation();" />
+            </accordion-group>
+
+            <!--Third Box-->
+            <accordion-group class="center box inactive-box" ng-class="isActive(2) ? 'active-box' : 'inactive-box'" is-open="boxes[2].isOpen" highlight-on-hover ng-click="selectBox(2);$event.stopPropagation();">
+                <accordion-heading>Collection Details</accordion-heading>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <label for="isHBIRequest">Is this hardware collection request considered HBI?</label>
+                    <div class="pickup-radio">
+                        <input type="radio" name="isHBIRequest" ng-model="ticket.isHBIRequest" ng-value="false" /><label>No</label>
+                    </div>
+                    <div class="pickup-radio">
+                        <input type="radio" name="isHBIRequest" ng-model="ticket.isHBIRequest" ng-value="true" /><label>Yes</label>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12" ng-show="ticket.isHBIRequest">
+                    <label for="needsSecureBins">Are secure containers needed?</label>
+                    <div class="pickup-radio">
+                        <input type="radio" name="needsSecureBins" ng-model="ticket.needsSecureBins" ng-value="false" /><label>No</label>
+                    </div>
+                    <div class="pickup-radio">
+                        <input type="radio" name="needsSecureBins" ng-model="ticket.needsSecureBins" ng-value="true" /><label>Yes</label>
+                    </div>
+
+                    <label for="secureBinQuantity" ng-show="ticket.needsSecureBins">How many secure containers are needed?</label>
+                    <select name="secureBinQuantity" ng-model="ticket.secureBinQuantity" ng-show="ticket.needsSecureBins">
+                        <option ng-repeat="secureBin in ticket.secureBins" value="{{secureBin.number}}">{{secureBin.number}}</option>
+                    </select>
+
+                    <label for="destructionLocation" ng-show="ticket.needsSecureBins == false || ticket.secureBinQuantity != ''">Will the collection be destroyed onsite or offsite?</label>
+                    <div class="pickup-radio" ng-show="ticket.needsSecureBins == false || ticket.secureBinQuantity != ''">
+                        <input type="radio" name="destructionLocation" ng-model="ticket.destructionLocation" value="Offsite" /><label>Offsite</label>
+                    </div>
+                    <div class="pickup-radio" ng-show="ticket.needsSecureBins == false || ticket.secureBinQuantity != ''">
+                        <input type="radio" name="destructionLocation" ng-model="ticket.destructionLocation" value="Onsite" /><label>Onsite</label>
+                    </div>
+
+                    <label for="destructionType" ng-show="ticket.destructionLocation != ''">What type of witness is required?</label>
+                    <select name="witnessType" ng-model="ticket.witnessType" ng-show="ticket.destructionLocation != ''">
+                        <option ng-repeat="type in ['Video', 'FTE', 'None']" value="{{type}}">{{type}}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12" ng-show="ticket.isHBIRequest === false || ticket.witnessType != '' || showContent">
+                    <label for="pickupSize">Is this a collection request for bulk or individual items?</label>
+                    <div class="pickup-radio">
+                        <input type="radio" name="pickupSize" ng-model="ticket.pickupSize" value="Bulk" ng-click="showContent = true" /><label>Bulk</label>
+                    </div>
+                    <div class="pickup-radio">
+                        <input type="radio" name="pickupSize" ng-model="ticket.pickupSize" value="Individual" ng-click="showContent = true" /><label>Individual</label>
+                    </div>
+                </div>
+
+                <!--Individual Pickup-->
+                <div class="col-md-6 col-sm-6 col-xs-6" ng-show="showContent && ticket.pickupSize == 'Individual'">
+                    <label for="computerQuantity">Quantity of Computers</label><br />
+                    <input type="text" name="computerQuantity" ng-model="ticket.computerQuantity" /><br />
+                    <label for="monitorQuantity">Quantity of Monitors</label><br />
+                    <input type="text" name="monitorQuantity" ng-model="ticket.monitorQuantity" /><br />
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6" ng-show="showContent && ticket.pickupSize == 'Individual'">
+                    <label for="miscQuantity">Quantity of Miscellaneous</label><br />
+                    <input type="text" name="miscQuantity" ng-model="ticket.miscQuantity" />
+                </div>
+
+                <!--Bulk Pickup-->
+                <div class="col-md-6 col-sm-6 col-xs-6" ng-show="showContent && ticket.pickupSize == 'Bulk'">
+                    <label for="computerQuantity">Quantity of Computers</label><br />
+                    <input type="text" name="computerQuantity" ng-model="ticket.computerQuantity" /><br />
+                    <label for="monitorQuantity">Quantity of Monitors</label><br />
+                    <input type="text" name="monitorQuantity" ng-model="ticket.monitorQuantity" /><br />
+                    <label for="miscQuantity">Quantity of Miscellaneous</label><br />
+                    <input type="text" name="miscQuantity" ng-model="ticket.miscQuantity" />
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6" ng-show="showContent && ticket.pickupSize == 'Bulk'">
+                    <label for="binQuantity">Quantity of Supply Bins</label><span ng-show="form.binQuantity.$error.required">Required</span><br />
+                    <select name="binQuantity" ng-model="ticket.binQuantity" required>
+                        <option ng-repeat="bin in ticket.bins" value="{{bin.number}}">{{bin.number}}</option>
+                    </select>
+                    <div ng-repeat="bin in ticket.bins">
+                        <div ng-if="bin.number <= ticket.binQuantity">
+                            <label for="{{bin.name}}">Bin Delivery Location</label><span ng-show="form.{{bin.name}}.$error.required">Required</span><br />
+                            <input type="text" name="{{bin.name}}" ng-model="bin.location" required />
+                        </div>
+                    </div>
+                </div>
+
+                <input type="button" value="Back" ng-click="selectBox(1);$event.stopPropagation();" />
+                <input type="button" value="Next" ng-click="selectBox(3);$event.stopPropagation();" />
+            </accordion-group>
+
+            <!--Fourth Box-->
+            <accordion-group class="center box inactive-box" ng-class="isActive(3) ? 'active-box' : 'inactive-box'" is-open="boxes[3].isOpen" highlight-on-hover ng-click="selectBox(3);$event.stopPropagation();">
+                <accordion-heading>Additional Notes</accordion-heading>
+                <div class="col-md-12 col-sm-12 col-xs-12 md-box">
+                    <label for="additionalNotes">Enter Any Additional Details Here</label><br />
+                    <textarea name="additionalnotes" ng-model="ticket.additionalNotes"></textarea>
+                </div>
+                <input type="button" value="Back" ng-click="selectBox(2);$event.stopPropagation();" />
+                <input type="submit" value="Create" />
+
+
+            </accordion-group>
+        </form>
+    </accordion>
+</section>
+

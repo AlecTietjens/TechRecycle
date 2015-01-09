@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TechRecycleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BulkTicketDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TicketNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BinQuantity" Type="int" Nullable="false" />
+          <Property Name="BinLocation1" Type="nvarchar(max)" />
+          <Property Name="BinLocation2" Type="nvarchar(max)" />
+          <Property Name="BinLocation3" Type="nvarchar(max)" />
+          <Property Name="BinLocation4" Type="nvarchar(max)" />
+          <Property Name="BinLocation5" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="HBITicketDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TicketNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NeedsSecureBins" Type="bit" Nullable="false" />
+          <Property Name="SecureBinQuantity" Type="int" Nullable="false" />
+          <Property Name="DestructionLocation" Type="nvarchar(max)" />
+          <Property Name="WitnessType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TicketNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Alias" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AlternateName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AlternatePhone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AlternateEmail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Building" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ComputerQuantity" Type="int" Nullable="false" />
+          <Property Name="MonitorQuantity" Type="int" Nullable="false" />
+          <Property Name="MiscQuantity" Type="int" Nullable="false" />
+          <Property Name="PickupSize" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsHBIRequest" Type="bit" Nullable="false" />
+          <Property Name="AdditionalNotes" Type="nvarchar(max)" />
+          <Property Name="CurrentStatus" Type="nvarchar(max)" />
+          <Property Name="LastModifiedBy" Type="nvarchar(max)" />
+          <Property Name="OpenDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="CloseDate" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="TechRecycleModelStoreContainer">
+          <EntitySet Name="BulkTicketDetails" EntityType="Self.BulkTicketDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HBITicketDetails" EntityType="Self.HBITicketDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TechRecycleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BulkTicketDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BinQuantity" Type="Int32" Nullable="false" />
+          <Property Name="BinLocation1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BinLocation2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BinLocation3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BinLocation4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BinLocation5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HBITicketDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NeedsSecureBins" Type="Boolean" Nullable="false" />
+          <Property Name="SecureBinQuantity" Type="Int32" Nullable="false" />
+          <Property Name="DestructionLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WitnessType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Alias" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AlternateName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AlternatePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AlternateEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Building" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ComputerQuantity" Type="Int32" Nullable="false" />
+          <Property Name="MonitorQuantity" Type="Int32" Nullable="false" />
+          <Property Name="MiscQuantity" Type="Int32" Nullable="false" />
+          <Property Name="PickupSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsHBIRequest" Type="Boolean" Nullable="false" />
+          <Property Name="AdditionalNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OpenDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="CloseDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="TechRecycleEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BulkTicketDetails" EntityType="Self.BulkTicketDetail" />
+          <EntitySet Name="HBITicketDetails" EntityType="Self.HBITicketDetail" />
+          <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TechRecycleModelStoreContainer" CdmEntityContainer="TechRecycleEntities">
+          <EntitySetMapping Name="BulkTicketDetails">
+            <EntityTypeMapping TypeName="TechRecycleModel.BulkTicketDetail">
+              <MappingFragment StoreEntitySet="BulkTicketDetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TicketNumber" ColumnName="TicketNumber" />
+                <ScalarProperty Name="BinQuantity" ColumnName="BinQuantity" />
+                <ScalarProperty Name="BinLocation1" ColumnName="BinLocation1" />
+                <ScalarProperty Name="BinLocation2" ColumnName="BinLocation2" />
+                <ScalarProperty Name="BinLocation3" ColumnName="BinLocation3" />
+                <ScalarProperty Name="BinLocation4" ColumnName="BinLocation4" />
+                <ScalarProperty Name="BinLocation5" ColumnName="BinLocation5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HBITicketDetails">
+            <EntityTypeMapping TypeName="TechRecycleModel.HBITicketDetail">
+              <MappingFragment StoreEntitySet="HBITicketDetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TicketNumber" ColumnName="TicketNumber" />
+                <ScalarProperty Name="NeedsSecureBins" ColumnName="NeedsSecureBins" />
+                <ScalarProperty Name="SecureBinQuantity" ColumnName="SecureBinQuantity" />
+                <ScalarProperty Name="DestructionLocation" ColumnName="DestructionLocation" />
+                <ScalarProperty Name="WitnessType" ColumnName="WitnessType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="TechRecycleModel.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TicketNumber" ColumnName="TicketNumber" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AlternateName" ColumnName="AlternateName" />
+                <ScalarProperty Name="AlternatePhone" ColumnName="AlternatePhone" />
+                <ScalarProperty Name="AlternateEmail" ColumnName="AlternateEmail" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ComputerQuantity" ColumnName="ComputerQuantity" />
+                <ScalarProperty Name="MonitorQuantity" ColumnName="MonitorQuantity" />
+                <ScalarProperty Name="MiscQuantity" ColumnName="MiscQuantity" />
+                <ScalarProperty Name="PickupSize" ColumnName="PickupSize" />
+                <ScalarProperty Name="IsHBIRequest" ColumnName="IsHBIRequest" />
+                <ScalarProperty Name="AdditionalNotes" ColumnName="AdditionalNotes" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="OpenDate" ColumnName="OpenDate" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="CloseDate" ColumnName="CloseDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

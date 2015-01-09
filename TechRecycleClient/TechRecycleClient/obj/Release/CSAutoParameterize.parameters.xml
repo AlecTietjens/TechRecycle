@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="TicketsContext-Web.config Connection String" description="TicketsContext Connection String used in web.config by the application to access the database." defaultValue="Server=CAVE-TEST;Initial Catalog=TechRecycle;Integrated Security=True;MultipleActiveResultSets=True;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\v-altiet\\Documents\\GitHub\\TechRecycleUI\\TechRecycleMVC\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TicketsContext']/@connectionString" />
+  </parameter>
+</parameters>

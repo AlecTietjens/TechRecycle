@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TechRecycleModelStoreContainer" CdmEntityContainer="TechRecycleEntities">
+    <EntitySetMapping Name="BulkTicketDetails">
+      <EntityTypeMapping TypeName="TechRecycleModel.BulkTicketDetail">
+        <MappingFragment StoreEntitySet="BulkTicketDetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TicketNumber" ColumnName="TicketNumber" />
+          <ScalarProperty Name="BinQuantity" ColumnName="BinQuantity" />
+          <ScalarProperty Name="BinLocation1" ColumnName="BinLocation1" />
+          <ScalarProperty Name="BinLocation2" ColumnName="BinLocation2" />
+          <ScalarProperty Name="BinLocation3" ColumnName="BinLocation3" />
+          <ScalarProperty Name="BinLocation4" ColumnName="BinLocation4" />
+          <ScalarProperty Name="BinLocation5" ColumnName="BinLocation5" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HBITicketDetails">
+      <EntityTypeMapping TypeName="TechRecycleModel.HBITicketDetail">
+        <MappingFragment StoreEntitySet="HBITicketDetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TicketNumber" ColumnName="TicketNumber" />
+          <ScalarProperty Name="NeedsSecureBins" ColumnName="NeedsSecureBins" />
+          <ScalarProperty Name="SecureBinQuantity" ColumnName="SecureBinQuantity" />
+          <ScalarProperty Name="DestructionLocation" ColumnName="DestructionLocation" />
+          <ScalarProperty Name="WitnessType" ColumnName="WitnessType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tickets">
+      <EntityTypeMapping TypeName="TechRecycleModel.Ticket">
+        <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TicketNumber" ColumnName="TicketNumber" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="AlternateName" ColumnName="AlternateName" />
+          <ScalarProperty Name="AlternatePhone" ColumnName="AlternatePhone" />
+          <ScalarProperty Name="AlternateEmail" ColumnName="AlternateEmail" />
+          <ScalarProperty Name="Building" ColumnName="Building" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="ComputerQuantity" ColumnName="ComputerQuantity" />
+          <ScalarProperty Name="MonitorQuantity" ColumnName="MonitorQuantity" />
+          <ScalarProperty Name="MiscQuantity" ColumnName="MiscQuantity" />
+          <ScalarProperty Name="PickupSize" ColumnName="PickupSize" />
+          <ScalarProperty Name="IsHBIRequest" ColumnName="IsHBIRequest" />
+          <ScalarProperty Name="AdditionalNotes" ColumnName="AdditionalNotes" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+          <ScalarProperty Name="OpenDate" ColumnName="OpenDate" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="CloseDate" ColumnName="CloseDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

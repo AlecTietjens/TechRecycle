@@ -1,0 +1,101 @@
+﻿@model string
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tech Recycle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="~/content/images/favicon.ico" rel="shortcut icon" />
+    <link href="~/content/styles/bootstrap.css" rel="stylesheet" />
+    <link href="~/content/styles/style2.css" rel="stylesheet" />
+</head>
+<body ng-app="techRecycleApp">
+    <header></header>
+
+    <div class="dashboard" ng-controller="ManagerCtrl">
+        <div class="left-panel">
+            <table class="table table-bordered" fixed-header>
+                <thead>
+                    <tr>
+                        <th>Ticket Number</th>
+                        <th>Current Status</th>
+                        <th>Alias</th>
+                        <th>Location</th>
+                        <th>Last Modified</th>
+                        <th>Last Modified By</th>
+                        <th>Open Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ticket in tickets" ng-click="selectTicket(ticket)" ng-class="{highlight: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
+                        <td>{{ticket.TicketNumber}}</td>
+                        <td>{{ticket.CurrentStatus}}</td>
+                        <td>{{ticket.Alias}}</td>
+                        <td>{{ticket.Location}}</td>
+                        <td>{{ticket.ModifyDate}}</td>
+                        <td>{{ticket.LastModifiedBy}}</td>
+                        <td>{{ticket.OpenDate}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="right-panel">
+            <div class="col-md-12 col-sm-12 col-xs-12"><h2>{{selectedTicket.TicketNumber}}</h2></div>
+
+            <label for="requesterInformation">Requester Information</label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <label for="name">Name: {{selectedTicket.Name}}</label><br />
+                <label for="phone">Phone: {{selectedTicket.Phone}}</label><br />
+                <label for="email">Email: {{selectedTicket.Email}}</label><br />
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <label for="alternateName">Alternate Name: {{selectedTicket.AlternateName}}</label><br />
+                <label for="alternatePhone">Alternate Phone: {{selectedTicket.AlternatePhone}}</label><br />
+                <label for="alternateEmail">Alternate Email: {{selectedTicket.AlternateEmail}}</label><br />
+            </div>
+
+            <label for="pickupLocation">Pickup Location</label>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <label for="building">Building: {{selectedTicket.Building}}</label><br />
+                <label for="location">Location: {{selectedTicket.Location}}</label>
+            </div>
+
+            <label for="collectionDetails">Collection Details</label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <label for="pickupSize">Pickup Size: {{selectedTicket.PickupSize}}</label><br />
+                <label for="binQuantity">Bin Quantity: {{selectedTicket.BinQuantity}}</label><br />
+                <label for="binLocation1">Bin Location 1: {{selectedTicket.BinLocation1}}</label><br />
+                <label for="binLocation2">Bin Location 2: {{selectedTicket.BinLocation2}}</label><br />
+                <label for="binLocation3">Bin Location 3: {{selectedTicket.BinLocation3}}</label><br />
+                <label for="binLocation4">Bin Location 4: {{selectedTicket.BinLocation4}}</label><br />
+                <label for="binLocation5">Bin Location 5: {{selectedTicket.BinLocation5}}</label><br />
+
+                <label for="computerQuantity">Computer Quantity: {{selectedTicket.ComputerQuantity}}</label><br />
+                <label for="monitorQuantity">Monitor Quantity: {{selectedTicket.MonitorQuantity}}</label><br />
+                <label for="miscQuantity">Misc Quantity: {{selectedTicket.MiscQuantity}}</label><br />
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <label for="isHBIRequest">HBI Request: {{selectedTicket.IsHBIRequest}}</label><br />
+                <label for="needsSecureBins">Needs Secure Bins: {{selectedTicket.NeedsSecureBins}}</label><br />
+                <label for="secureBinQuantity">Secure Bin Quantity: {{selectedTicket.SecureBinQuantity}}</label><br />
+                <label for="destructionLocation">Destroy Onsite or Offsite: {{selectedTicket.DestructionLocation}}</label><br />
+                <label for="witnessType">Type of Witness: {{selectedTicket.WitnessType}}</label><br />
+            </div>
+
+            <label for="additionalNotes">Additional Notes</label>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <label>Additional Notes: {{selectedTicket.AdditionalNotes}}</label><br />
+            </div>
+        </div>
+    </div>
+
+    <footer class="center"></footer>
+    <script src="~/content/scripts/angular.js"></script>
+    <script src="~/content/scripts/angular-route.js"></script>
+    <script src="~/content/scripts/angular-animate.js"></script>
+    <script src="~/content/scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="~/app/app.js"></script>
+</body>
+</html>

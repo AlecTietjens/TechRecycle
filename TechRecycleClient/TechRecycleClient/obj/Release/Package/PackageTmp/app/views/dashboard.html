@@ -1,0 +1,28 @@
+﻿<section class="center main-page">
+    <h2 class="header-box center">Dashboard</h2>
+    <div class="center dashboard">
+        <div class="tile-container">
+            <div class="tile long-tile" highlight-on-hover><a href="#/TicketCreate"><span>Create Ticket</span></a></div>
+            <div class="tile" highlight-on-hover><a href="mailto:hms@microsoft.com"><span>Contact</span></a></div>
+            <div class="tile" highlight-on-hover><a href="https://microsoft.sharepoint.com/teams/Purchasing/technologyrecycling/pages/default.aspx" target="_blank"><span>FAQ</span></a></div>
+        </div>
+        <div class="main-box">
+            <h4>Your Tickets</h4>
+            <table class="center tickets-table" ng-if="tickets != ''" fixed-header>
+                <thead>
+                    <tr>
+                        <th>Ticket Number</th>
+                        <th>Current Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ticket in tickets">
+                        <td>{{ticket.ticketNumber}}</td>
+                        <td>{{ticket.currentStatus}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="ticket-notification" ng-if="tickets == ''">You have not created any hardware recycle requests. Would you like to <a href="#/TicketCreate">create a request ticket?</a></div>
+        </div>
+    </div>
+</section>
