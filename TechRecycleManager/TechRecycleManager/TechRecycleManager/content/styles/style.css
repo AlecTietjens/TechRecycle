@@ -5,6 +5,9 @@
 body {
     background-color: #E0E0EB;
     height: 100%;
+    font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif;
+    margin: 0;
+    font-weight: 500;
 }
 
 header {
@@ -21,7 +24,7 @@ ul {
 
 li {
     padding: 0;
-    display: inline-block;
+    display: flex;
 }
 
 .dashboard {
@@ -34,6 +37,14 @@ li {
 }
 
 .holdhighlight {
+}
+
+.bottom-panel p {
+    color: green;
+}
+
+input[type=checkbox] {
+    margin: 6px 10px 0 4px;
 }
 
 .dashboard > div {
@@ -49,8 +60,7 @@ li {
 
 .heading {
     width: 100%;
-    min-height: 30px;
-    height: 8%;
+    height: 6px;
     background-color: gray;
     text-align: center;
     color: white;
@@ -84,32 +94,46 @@ th, td {
     max-height: 70px;
 }
 
+th {
+    text-align: center;
+}
+
+td {
+    text-align: right;
+}
+
 tr {
     max-height: 70px;
 }
 
 .filter-options {
-    font-size: 1.3em;
+    font-size: 18px;
     position: absolute;
     width: 100%;
-    bottom: 0;
+    bottom: 10px;
     padding-right: 20px;
 }
 
     .filter-options li {
-        height: 25px;
+        height: 24px;
     }
+
+        .filter-options li:first-child {
+            float: left;
+        }
 
         .filter-options li:last-child {
             float: right;
         }
 
     .filter-options input[type="text"] {
+        margin-left: 10px;
+        height: 24px;
         width: 255px;
-        height:25px;
     }
 
 .bottom-panel {
+    position: relative;
     width: 98%;
 }
 
@@ -120,4 +144,66 @@ label[for=requesterInformation], label[for=pickupLocation], label[for=collection
     margin: 20px 0;
     padding-left: 30px;
     border-bottom: 1px solid black;
+}
+
+.bottom-panel .buttons-panel {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    padding: 2px;
+}
+
+input[type=button] {
+    background-color: #007dcf;
+    color: white;
+    border: none;
+    font-size: 14px;
+    height: 44px;
+    float:right;
+}
+
+legend {
+    margin-top: -4px;
+    font-size: 32px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    font-weight: 600;
+    margin-bottom:10px;
+}
+
+.modal-dialog {
+    margin-top: 300px;
+}
+
+.modal-content {
+    border-radius: 0;
+    border: none;
+}
+
+.modal-bdy {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.modal-ftr .button-holder {
+margin:auto;
+}
+
+.modal-ftr input[type=button] {
+    margin:10px 10px 20px 0px;
+    padding-right:16px;
+    padding-left:16px;
+    width:70px;
+    height:30px;
+}
+
+    .modal-ftr input[type=button]:focus {
+        border-color: rgb(77,144,254);
+        border-width: 5px;
+        box-shadow: 0 0 15px rgb(77,144,254);
+    }
+
+.modal-ftr {
+    position: relative;
+    min-height: 52px;
 }

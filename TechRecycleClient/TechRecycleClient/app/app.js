@@ -85,27 +85,6 @@
         // no items needed here as of now - scope is 
     }]);
 
-    app.controller('ManagerCtrl', ['$scope', '$http', function ($scope, $http) {
-        //$scope.getMyCtrlScope = function () {
-        //    return $scope;
-        //}
-        
-        $scope.selectedTicket = {};
-
-        $scope.tickets = {};
-        $http.get('/Manager/GetAll').
-        success(function (data) {
-            $scope.tickets = JSON.parse(data);
-        }).
-        error(function (data) {
-
-        });
-
-        $scope.selectTicket = function(ticket) {
-            $scope.selectedTicket = ticket;
-        }
-    }]);
-
     app.controller('TicketCreateCtrl', ['$scope', '$location', '$http', 'modalService', function ($scope, $location, $http, modalService) {
         function BoxValidationError(box, message) {
             this.message = message;

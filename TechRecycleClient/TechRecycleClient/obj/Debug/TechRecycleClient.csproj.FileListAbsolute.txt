@@ -18,8 +18,6 @@ C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleMVC\
 C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleMVC\obj\Debug\TechRecycleClient.csproj.GenerateResource.Cache
 C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleMVC\obj\Debug\TechRecycleClient.dll
 C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleMVC\obj\Debug\TechRecycleClient.pdb
-C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleClient\obj\Debug\TechRecycleClient.Migrations.first.resources
-C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleClient\obj\Debug\TechRecycleClient.csproj.GenerateResource.Cache
 C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleClient\bin\TechRecycleClient.dll.config
 C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleClient\bin\TechRecycleClient.dll
 C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleClient\bin\TechRecycleClient.pdb
@@ -55,7 +53,6 @@ C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleClie
 C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleClient\bin\System.Web.Http.xml
 C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleClient\bin\System.Web.Http.WebHost.xml
 C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleClient\obj\Debug\TechRecycleClient.csprojResolveAssemblyReference.cache
-C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleClient\obj\Debug\TechRecycleClient.Migrations.second.resources
 C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleClient\bin\Microsoft.Web.Helpers.dll
 C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleClient\bin\WebMatrix.Data.dll
 C:\Users\v-altiet\Documents\GitHub\TechRecycle\TechRecycleClient\TechRecycleClient\bin\WebMatrix.WebData.dll

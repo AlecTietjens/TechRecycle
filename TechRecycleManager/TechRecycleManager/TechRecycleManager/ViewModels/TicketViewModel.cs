@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TechRecycleClient.Models
+namespace TechRecycleManager.Models
 {
     public class TicketViewModel
     {
@@ -27,6 +27,11 @@ namespace TechRecycleClient.Models
         public string BinLocation3 { get; set; }
         public string BinLocation4 { get; set; }
         public string BinLocation5 { get; set; }
+        public Boolean IsHBIRequest { get; set; }
+        public Boolean NeedsSecureBins { get; set; }
+        public int SecureBinQuantity { get; set; }
+        public string DestructionLocation { get; set; }
+        public string WitnessType { get; set; }
         public string AdditionalNotes { get; set; }
         public string CurrentStatus { get; set; }
         public string LastModifiedBy { get; set; }

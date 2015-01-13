@@ -4,9 +4,9 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
-using TechRecycleClient.Models;
+using TechRecycleManager.Models;
 
-namespace TechRecycleClient.DAL
+namespace TechRecycleManager.DAL
 {
     public class TicketsContext : DbContext
     {

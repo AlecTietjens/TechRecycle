@@ -139,14 +139,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201412180204597_first.cs" />
-    <Compile Include="Migrations\201412180204597_first.Designer.cs">
-      <DependentUpon>201412180204597_first.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501061907125_second.cs" />
-    <Compile Include="Migrations\201501061907125_second.Designer.cs">
-      <DependentUpon>201501061907125_second.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BulkTicketDetails.cs" />
     <Compile Include="Models\HBITicketDetails.cs" />
@@ -236,14 +228,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\TechRecycle.pubxml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201412180204597_first.resx">
-      <DependentUpon>201412180204597_first.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501061907125_second.resx">
-      <DependentUpon>201501061907125_second.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

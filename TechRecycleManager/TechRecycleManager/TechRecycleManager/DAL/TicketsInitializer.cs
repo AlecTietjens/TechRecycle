@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
-using TechRecycleClient.Models;
+using TechRecycleManager.Models;
 
-namespace TechRecycleClient.DAL
+namespace TechRecycleManager.DAL
 {
     public class TicketsInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<TicketsContext>
     {

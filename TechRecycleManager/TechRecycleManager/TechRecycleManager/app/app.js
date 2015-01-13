@@ -60,14 +60,14 @@
         //};
     }]);
 
-    app.controller('ManagerCtrl', ['$scope', '$http', function ($scope, $http) {
+    app.controller('ManagerCtrl', ['$scope', '$http', 'modalService', function ($scope, $http, modalService) {
         //$scope.getMyCtrlScope = function () {
         //    return $scope;
         //}
         
         $scope.selectedTicket = {};
-
         $scope.tickets = {};
+
         $http.get('/Manager/GetAll').
         success(function (data) {
             $scope.tickets = JSON.parse(data);
@@ -79,8 +79,19 @@
         $scope.selectTicket = function(ticket) {
             $scope.selectedTicket = ticket;
         }
+
+        $scope.schedulePickup = function (ticket) {
+            var modalOptions = {
+                bodyText: "When would you like to schedule the pickup?"
+            };
+
+            modalService.showModal({}, modalOptions).then(function () {
+                location.reload(true);
+            }, function () { modal.close();});
+        }
     }]);
 
+    // directive to highlight on hover
     app.directive('highlightOnHover', function () {
         return {
             restrict: 'A',
@@ -114,6 +125,7 @@
         }
     });
 
+    // directive to adapt header width
     app.directive('hdrAdaptWidth', function () {
         return {
             restrict: 'A',
@@ -186,6 +198,7 @@
         }
     }]);
 
+    // directive that only allows digits to be entered into a text field
     app.directive('onlyDigits', function () {
 
         return {
@@ -203,4 +216,14 @@
         }
     });
 
+    // fix this
+    app.directive('widthAdapter', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                element.css("width", 70 * element.children("input").length + 20 * (element.children("input").length - 1));
+                scope.stuff = element[0];
+            }
+        }
+    });
 })();

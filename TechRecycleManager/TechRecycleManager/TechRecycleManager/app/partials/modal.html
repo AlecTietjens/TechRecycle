@@ -5,5 +5,8 @@
     <p>{{modalOptions.bodyText}}</p>
 </div>
 <div class="modal-ftr">
-    <input type="button" value="{{modalOptions.actionButtonText}}" ng-click="modalOptions.ok();" />
+    <div class="button-holder">
+        <input type="button" value="{{modalOptions.actionButtonText}}" ng-click="modalOptions.ok();" />
+        <input type="button" value="{{modalOptions.closeButtonText}}" ng-click="" />
+    </div>
 </div>

@@ -6,10 +6,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using TechRecycleClient.DAL;
-using TechRecycleClient.Models;
+using TechRecycleManager.DAL;
+using TechRecycleManager.Models;
+using System.Data.Entity;
 
-namespace TechRecycleClient.Controllers
+namespace TechRecycleManager.Controllers
 {
     public class ManagerController : Controller
     {
@@ -26,7 +27,8 @@ namespace TechRecycleClient.Controllers
 
             var tickets = new List<TicketViewModel>();
 
-            foreach(var t in db.Tickets.ToList()){
+            foreach (var t in db.Tickets.ToList())
+            {
                 var ticket = new TicketViewModel();
 
                 ticket.TicketNumber = t.TicketNumber;
@@ -47,6 +49,28 @@ namespace TechRecycleClient.Controllers
                 ticket.OpenDate = t.OpenDate.ToString();
                 ticket.ModifyDate = t.ModifyDate.ToString();
                 ticket.LastModifiedBy = t.LastModifiedBy;
+                ticket.IsHBIRequest = t.IsHBIRequest;
+                ticket.AdditionalNotes = t.AdditionalNotes;
+
+                if (ticket.PickupSize == "Bulk")
+                {
+                    var bulkDetails = db.BulkTicketDetails.Where(x => x.TicketNumber == ticket.TicketNumber).SingleOrDefault();
+                    ticket.BinQuantity = bulkDetails.BinQuantity;
+                    ticket.BinLocation1 = bulkDetails.BinLocation1;
+                    ticket.BinLocation2 = bulkDetails.BinLocation2;
+                    ticket.BinLocation3 = bulkDetails.BinLocation3;
+                    ticket.BinLocation4 = bulkDetails.BinLocation4;
+                    ticket.BinLocation5 = bulkDetails.BinLocation5;
+                }
+
+                if (ticket.IsHBIRequest == true)
+                {
+                    var hbiDetails = db.HBITicketDetails.Where(x => x.TicketNumber == ticket.TicketNumber).SingleOrDefault();
+                    ticket.NeedsSecureBins = hbiDetails.NeedsSecureBins;
+                    ticket.SecureBinQuantity = hbiDetails.SecureBinQuantity;
+                    ticket.DestructionLocation = hbiDetails.DestructionLocation;
+                    ticket.WitnessType = hbiDetails.WitnessType;
+                }
 
                 tickets.Add(ticket);
             }

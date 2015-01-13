@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace TechRecycleClient.Models
+namespace TechRecycleManager.Models
 {
     public class BulkTicketDetails
     {
