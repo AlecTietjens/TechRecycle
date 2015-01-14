@@ -41,6 +41,7 @@ namespace TechRecycleManager.Models
         [Required]
         public DateTime OpenDate { get; set; }
         public DateTime? ModifyDate { get; set; }
+        public DateTime? ScheduleDate { get; set; }
         public DateTime? CloseDate { get; set; }
     }
 }

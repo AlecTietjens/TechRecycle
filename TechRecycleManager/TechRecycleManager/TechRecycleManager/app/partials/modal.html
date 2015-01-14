@@ -3,10 +3,14 @@
 </div>
 <div class="modal-bdy">
     <p>{{modalOptions.bodyText}}</p>
+    <form ng-if="modalOptions.showScheduler">
+        Please enter in the format of <b><em>mm-dd-yy hh:mm:ss</em></b>
+        <input style="margin-left:10px;" type="text" name="datetime" ng-model="modalOptions.datetime" />
+    </form>
 </div>
 <div class="modal-ftr">
     <div class="button-holder">
-        <input type="button" value="{{modalOptions.actionButtonText}}" ng-click="modalOptions.ok();" />
-        <input type="button" value="{{modalOptions.closeButtonText}}" ng-click="" />
+        <input type="button" value="{{modalOptions.actionButtonText}}" ng-click="modalOptions.schedule(modalOptions.ticket, modalOptions.datetime, modalOptions.currentUser);" />
+        <input type="button" value="{{modalOptions.closeButtonText}}" ng-click="modalOptions.cancel();" />
     </div>
 </div>

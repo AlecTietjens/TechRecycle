@@ -1,0 +1,12 @@
+﻿<div ng-if="modalOptions.showHeader" class="modal-hdr">
+    <h3>{{modalOptions.headerText}}</h3>
+</div>
+<div class="modal-bdy">
+    <p>{{modalOptions.bodyText}}funny</p>{{ticket}}
+</div>
+<div class="modal-ftr">
+    <div class="button-holder">
+        <input type="button" value="{{modalOptions.actionButtonText}}" ng-click="modalOptions.schedule();" />
+        <input type="button" value="{{modalOptions.closeButtonText}}" ng-click="modalOptions.cancel();" />
+    </div>
+</div>

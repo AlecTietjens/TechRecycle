@@ -1,8 +1,8 @@
 ﻿(function () {
     var app = angular.module('techRecycleApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);
 
-    app.service('modalService', ['$modal',
-    function ($modal) {
+    app.service('modalService', ['$modal', '$http',
+    function ($modal, $http) {
 
         var modalDefaults = {
             backdrop: true,
@@ -12,8 +12,9 @@
         };
 
         var modalOptions = {
-            closeButtonText: 'Close',
-            actionButtonText: 'Ok',
+            okButtonText: 'OK',
+            closeButtonText: 'Cancel',
+            actionButtonText: 'Submit',
             headerText: 'Proceed?',
             bodyText: 'Perform this action?',
             showHeader: false
@@ -38,12 +39,42 @@
 
             if (!tempModalDefaults.controller) {
                 tempModalDefaults.controller = function ($scope, $modalInstance) {
+
+                    $scope.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
                     $scope.modalOptions = tempModalOptions;
                     $scope.modalOptions.ok = function (result) {
                         $modalInstance.close(result);
                     };
                     $scope.modalOptions.close = function (result) {
                         $modalInstance.dismiss('cancel');
+                    };
+                    $scope.modalOptions.schedule = function (ticket, datetime, currentUser) {
+                        var scheduleInfo = {
+                            ticketNumber: ticket.TicketNumber,
+                            datetime: datetime,
+                            alias: currentUser
+                        }
+
+                        $http({
+                            method: "post",
+                            url: "/Manager/SchedulePickup",
+                            data: scheduleInfo
+                        }).success(function (data) {
+                            location.reload(true);
+
+                        }).error(function (data) {
+                            var modalOptions = {
+                                bodyText: "Error scheduling pickup - please contact support."
+                            };
+
+                            modalService.showModal({}, modalOptions).then(function () {
+                                location.reload(true);
+                            });
+                        });
+                    };
+                    $scope.modalOptions.cancel = function (result) {
+                        $modalInstance.close(result);
                     };
                 }
             }
@@ -64,9 +95,10 @@
         //$scope.getMyCtrlScope = function () {
         //    return $scope;
         //}
-        
+
         $scope.selectedTicket = {};
         $scope.tickets = {};
+        $scope.currentUser = "v-altiet";
 
         $http.get('/Manager/GetAll').
         success(function (data) {
@@ -76,20 +108,63 @@
 
         });
 
-        $scope.selectTicket = function(ticket) {
+        $scope.selectTicket = function (ticket) {
             $scope.selectedTicket = ticket;
         }
 
         $scope.schedulePickup = function (ticket) {
             var modalOptions = {
-                bodyText: "When would you like to schedule the pickup?"
+                bodyText: "When would you like to schedule the pickup for ticket " + ticket.TicketNumber + "?",
+                ticket: ticket,
+                currentUser: $scope.currentUser,
+                showScheduler: true
             };
 
-            modalService.showModal({}, modalOptions).then(function () {
-                location.reload(true);
-            }, function () { modal.close();});
+            modalService.showModal({
+            }, modalOptions).then(function () {
+            });
+        }
+
+        $scope.isActive = function (ticket) {
+            return ticket.TicketNumber == $scope.selectedTicket.TicketNumber;
         }
     }]);
+
+    app.controller('DatepickerCtrl', function ($scope) {
+        $scope.today = function () {
+            $scope.dt = new Date();
+        };
+        $scope.today();
+
+        $scope.clear = function () {
+            $scope.dt = null;
+        };
+
+        // Disable weekend selection
+        $scope.disabled = function (date, mode) {
+            return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+        };
+
+        $scope.toggleMin = function () {
+            $scope.minDate = $scope.minDate ? null : new Date();
+        };
+        $scope.toggleMin();
+
+        $scope.open = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened = true;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+    });
 
     // directive to highlight on hover
     app.directive('highlightOnHover', function () {

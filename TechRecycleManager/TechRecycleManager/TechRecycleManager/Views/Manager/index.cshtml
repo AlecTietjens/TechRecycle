@@ -30,12 +30,12 @@
                         <th>Alias</th>
                         <th>Location</th>
                         <th>Last Modified By</th>
-                        <th>Last Modified Date</th>
+                        <th>Modified Date</th>
                         <th>Open Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="ticket in tickets" ng-click="selectTicket(ticket)" ng-class="{highlight: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
+                    <tr ng-repeat="ticket in tickets" ng-click="selectTicket(ticket)" ng-class="isActive(ticket) ? 'active-row' : {highlight: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
                         <td>{{ticket.TicketNumber}}</td>
                         <td>{{ticket.CurrentStatus}}</td>
                         <td>{{ticket.Alias}}</td>
@@ -54,7 +54,7 @@
                         Scheduled <input type="checkbox" value="Scheduled" checked /> 
                         Closed <input type="checkbox" value="Closed" />
                     </li><li>
-                        <b>Search by Name, Alias, or Date:</b> <input type="text" />
+                        <b>Search by Ticket, Name, Alias, or Date:</b> <input type="text" />
                     </li>
                 </ul>
             </div>
@@ -63,11 +63,13 @@
         <div class="bottom-panel">
             <div ng-if="selectedTicket.TicketNumber">
                 <div class="buttons-panel">
-                    <input type="button" value="Schedule Pickup" ng-click="schedulePickup(selectedTicket)" />
+                    <input type="button" value="Schedule Pickup" ng-click="schedulePickup(selectedTicket)" ng-if="selectedTicket.CurrentStatus == 'Open'" />
+                    <input type="button" value="Close Ticket" ng-click="" ng-if="selectedTicket.CurrentStatus == 'Scheduled'" />
+                    <input type="button" value="Reschedule Pickup" ng-click="schedulePickup(selectedTicket)" ng-if="selectedTicket.CurrentStatus == 'Scheduled'" />
                 </div>
                 <fieldset>
                     <legend>{{selectedTicket.TicketNumber}}</legend>
-                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
                         <label for="name">Name:</label> {{selectedTicket.Name}}<br />
                         <label for="alias">Alias:</label> {{selectedTicket.Alias}}<br />
                         <label for="phone" clean-phone>Phone:</label> {{selectedTicket.Phone.substring(0,1)}}<span></span>{{selectedTicket.Phone.substring(1)}}<br />
@@ -78,7 +80,7 @@
                         <label for="building">Building:</label> {{selectedTicket.Building}}<br />
                         <label for="location">Location:</label> {{selectedTicket.Location}}<br />
                     </div>
-                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
                         <label for="pickupSize">Pickup Size:</label> {{selectedTicket.PickupSize}}<br />
                         <label for="binQuantity">Bin Quantity:</label> {{selectedTicket.BinQuantity || "N/A"}}<br />
                         <label for="computerQuantity">Computer Quantity:</label> {{selectedTicket.ComputerQuantity}}<br />
@@ -90,7 +92,7 @@
                         <label for="binLocation4">Bin Location 4:</label> {{selectedTicket.BinLocation4 || "N/A"}}<br />
                         <label for="binLocation5">Bin Location 5:</label> {{selectedTicket.BinLocation5 || "N/A"}}<br />
                     </div>
-                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
                         <label for="isHBIRequest">HBI Request:</label> {{selectedTicket.IsHBIRequest ? "HBI" : "Non-HBI"}}<br />
                         <label for="needsSecureBins">Needs Secure Bins:</label> {{selectedTicket.NeedsSecureBins || "N/A"}}<br />
                         <label for="secureBinQuantity">Secure Bin Quantity:</label> {{selectedTicket.SecureBinQuantity || "N/A"}}<br />
@@ -98,7 +100,7 @@
                         <label for="witnessType">Type of Witness:</label> {{selectedTicket.WitnessType || "N/A"}}<br />
                         <label>Additional Notes:</label> {{selectedTicket.AdditionalNotes || "N/A"}}<br />
                     </div>
-                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
                         <label for="openDate">Open Date:</label> {{selectedTicket.OpenDate}}<br />
                         <label for="modifyDate">Modify Date:</label> {{selectedTicket.ModifyDate}}<br />
                         <label for="closeDate">Close Date:</label> {{selectedTicket.CloseDate}}<br />

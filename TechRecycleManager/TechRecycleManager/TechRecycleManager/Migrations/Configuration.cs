@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Web;
-using TechRecycleManager.Models;
-
-namespace TechRecycleManager.DAL
+namespace TechRecycleManager.Migrations
 {
-    public class TicketsInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<TicketsContext>
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+    using TechRecycleManager.DAL;
+    using TechRecycleManager.Models;
+
+    internal sealed class Configuration : DbMigrationsConfiguration<TechRecycleManager.DAL.TicketsContext>
     {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = false;
+        }
+
         protected override void Seed(TicketsContext context)
         {
             string[] firstNames = new string[] {"James","John","Robert","Michael","William","David","Richard","Charles","Joseph","Thomas","Christopher","Mary","Patricia","Linda","Barbara",
@@ -40,11 +46,12 @@ namespace TechRecycleManager.DAL
             var r = new Random();
 
             var tickets = new List<Ticket>();
-            var bulkLocations = new List<BulkTicketDetails>();
+            var bulkTickets = new List<BulkTicketDetails>();
+            var hbiTickets = new List<HBITicketDetails>();
 
             var date = new DateTime(2014, 11, 19, 8, 0, 0);
 
-            for (int i = 0; i < 400;i++)
+            for (int i = 0; i < 400; i++)
             {
                 var ticket = new Ticket();
 
@@ -70,8 +77,8 @@ namespace TechRecycleManager.DAL
                 {
                     phoneNumber += r.Next(10).ToString();
                 }
-                phoneNumber.Insert(3, "-");
-                phoneNumber.Insert(7, "-");
+                phoneNumber = phoneNumber.Insert(3, "-");
+                phoneNumber = phoneNumber.Insert(7, "-");
                 ticket.Phone = phoneNumber;
 
                 ticket.Email = firstName + lastName + "@" + emailDomains[r.Next(emailDomains.Length)];
@@ -85,8 +92,8 @@ namespace TechRecycleManager.DAL
                 {
                     phoneNumber += r.Next(10).ToString();
                 }
-                phoneNumber.Insert(3, "-");
-                phoneNumber.Insert(6, "-");
+                phoneNumber = phoneNumber.Insert(3, "-");
+                phoneNumber = phoneNumber.Insert(6, "-");
                 ticket.AlternatePhone = phoneNumber;
 
                 ticket.AlternateEmail = firstName + lastName + "@" + emailDomains[r.Next(emailDomains.Length)];
@@ -112,14 +119,30 @@ namespace TechRecycleManager.DAL
                         break;
                 }
 
+                var IsHBIRequest = r.Next(2);
+                if (IsHBIRequest == 1)
+                {
+                    ticket.IsHBIRequest = true;
+                    var HBIDetails = new HBITicketDetails();
+                    HBIDetails.TicketNumber = ticket.TicketNumber;
+                    HBIDetails.NeedsSecureBins = r.Next(2) == 1 ? true : false;
+                    if (HBIDetails.NeedsSecureBins)
+                    {
+                        HBIDetails.SecureBinQuantity = r.Next(5);
+                    }
+                    HBIDetails.DestructionLocation = r.Next(2) == 1 ? "Onsite" : "Offsite";
+                    HBIDetails.WitnessType = r.Next(3) >= 1 ? (r.Next(2) == 1 ? "FTE" : "Video") : "None";
+                    hbiTickets.Add(HBIDetails);
+                }
+
                 if (PickupClassification == 1)
                 {
                     var bulkDetails = new BulkTicketDetails();
                     bulkDetails.TicketNumber = ticket.TicketNumber;
                     bulkDetails.BinQuantity = r.Next(5);
-                    for (i = 0; i < bulkDetails.BinQuantity; i++)
+                    for (int j = 0; j < bulkDetails.BinQuantity; j++)
                     {
-                        switch (i)
+                        switch (j)
                         {
                             case 0:
                                 bulkDetails.BinLocation1 = locations[r.Next(locations.Length)];
@@ -141,6 +164,7 @@ namespace TechRecycleManager.DAL
                                 break;
                         }
                     }
+                    bulkTickets.Add(bulkDetails);
                 }
 
                 ticket.AdditionalNotes = additionaldetails[r.Next(additionaldetails.Length)];
@@ -199,6 +223,9 @@ namespace TechRecycleManager.DAL
             //};
 
             tickets.ForEach(t => context.Tickets.Add(t));
+            bulkTickets.ForEach(t => context.BulkTicketDetails.Add(t));
+            hbiTickets.ForEach(t => context.HBITicketDetails.Add(t));
+
             context.SaveChanges();
         }
     }

@@ -85,5 +85,29 @@ namespace TechRecycleManager.Controllers
 
             //return JsonConvert.SerializeObject(tickets, Formatting.None, settings);
         }
+
+        public string SchedulePickup(ScheduleInfoInput scheduleInfo) 
+        {
+            Ticket ticket = db.Tickets.Where(x => x.TicketNumber == scheduleInfo.TicketNumber).SingleOrDefault();
+
+            if(ModelState.IsValid)
+            {
+                int month = Convert.ToInt32(scheduleInfo.Datetime.Substring(0,2));
+                var day = Convert.ToInt32(scheduleInfo.Datetime.Substring(3,2));
+                var year = 2000 + Convert.ToInt32(scheduleInfo.Datetime.Substring(6, 2));
+                var hour = Convert.ToInt32(scheduleInfo.Datetime.Substring(9,2));
+                var min = Convert.ToInt32(scheduleInfo.Datetime.Substring(12,2));
+                var sec = Convert.ToInt32(scheduleInfo.Datetime.Substring(15,2));
+                ticket.ScheduleDate = new DateTime(year, month, day, hour, min, sec);
+                ticket.ModifyDate = DateTime.Now;
+                ticket.LastModifiedBy = scheduleInfo.Alias;
+                ticket.CurrentStatus = "Scheduled";
+                db.Entry(ticket).State = EntityState.Modified;
+                db.SaveChanges();
+                return "Ticket pickup has been scheduled";
+            }
+
+            return "";
+        }
     }
 }
